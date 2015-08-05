@@ -589,6 +589,11 @@ class puppet (
     validate_re($manage_packages, '^(server|agent)$')
   }
 
+  if $server_implementation == 'puppetserver' {
+    validate_re($server_jvm_min_heap_size, '^[0-9]+[kKmMgG]$')
+    validate_re($server_jvm_max_heap_size, '^[0-9]+[kKmMgG]$')
+  }
+
   include ::puppet::config
   Class['puppet::config'] -> Class['puppet']
 
